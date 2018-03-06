@@ -1,0 +1,28 @@
+extends ./layout.jade
+
+block title
+  title Login Page
+
+block content
+  .container.well(style="background-color:#ebffe652")
+      if PersonalChatHistory.length!=0
+        each  value,index  in PersonalChatHistory
+          if value.from==user1
+            div.col-lg-12
+              div.pull-left.well(style="background-color:#e5fff9")
+                h4 Me
+                h5 #{value.text}
+                &nbsp &nbsp &nbsp
+                - var dateView = value.createdAt
+                |#{moment(dateView).format('lll')}
+
+          else
+            div.col-lg-12
+              div.pull-right.well(style="background-color:#e5fff9")
+                h4 #{value.from}
+                h5 #{value.text}
+                &nbsp &nbsp &nbsp
+                - var dateView = value.createdAt
+                |#{moment(dateView).format('lll')}
+      else
+        h3 no record Found

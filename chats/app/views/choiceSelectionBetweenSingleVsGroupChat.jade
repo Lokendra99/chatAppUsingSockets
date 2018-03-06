@@ -1,0 +1,13 @@
+extends ./layout.jade
+
+block title
+  title Choice Page
+block content
+    .container.well(style='margin-top:50px;text-align:center')
+      h3 Please select your choice
+      a(href='/main?choice=singleChat&permanent_user=#{permanent_user}')
+        button.btn.btn-primary(type='button') Single Chat
+    .container.well(style='margin-top:50px;text-align:center')
+      h3 Check your previous Chats
+      a(href='/chatHistoryOfIndividual/#{permanent_user}')
+        button.btn.btn-primary(type='button') Previous Chats

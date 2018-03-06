@@ -1,0 +1,88 @@
+doctype html
+html
+  head
+    title Sockets
+    script(src='/js/library/jquery-3.1.1.min.js')
+    link(rel='stylesheet', href='/js/library/bootstrap-3.3.7.min.css')
+    script(src='/js/library/bootstrap-3.3.7.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/library/deParam.js')
+    script(src='/js/library/autoScroll.js')
+    script(src='/js/library/newMessageCreation.js')
+    script(src='/js/client.js')
+    script(src='/js/library/moment.js')
+    link(rel='stylesheet', href='/css/chatStyle.css')
+  body.chat
+    div#divcheck.text-center
+      #modal-content
+        img(src='/images/lo.gif')
+        H2 Getting your location!!
+    .chat__sidebar
+      h3 People #{choice}
+      h3
+      a(href='/loginPage')
+        button#leaveChatBtn.btn.btn-danger leave chat
+      h3  Send Image
+      button.btn.btn-danger.filebutton(style="width:191px;margin-left:10px")
+          input#imagefile(type='file',placeholder='Upload the image',accept='image/*')
+      h3  Send Video
+      button.btn.btn-danger.filebutton(style="width:191px;margin-left:10px")
+          input#videofile(type='file',placeholder='Upload the Video',accept='video/*')
+
+      script.
+        var user = !{JSON.stringify(user)};
+        var room = !{JSON.stringify(room)};
+        var choice = !{JSON.stringify(choice)};
+
+    .chat__main
+      div#messages.chat__messages
+        #lines
+          if PersonalChatHistory.length!=0
+            each  value,index  in PersonalChatHistory
+              if value.from==user1
+                div.col-xs-12.col-sm-12.col-lg-12
+                  div.checkcls.pull-left.well(style="background-color:#e5fff9")
+                    b #{value.from}
+                    h5
+                    -var msgtxt=value.text
+                    if(msgtxt.search('data:video')>=0)
+                      b Video :
+                      video(width=320 height=240 controls='' src="#{value.text}" type='video/mp4')
+                    else if(msgtxt.search('data:image')>=0)
+                      b Image :
+                      img(style='width:220px;height200px', src="#{value.text}")
+                    else
+                      b Msg :
+                      &nbsp #{value.text}
+
+                    h5.text-right
+                      - var dateView = value.createdAt
+                      |#{moment(dateView).format('lll')}
+              else
+                div.col-xs-12.col-sm-12.col-lg-12
+                  div.checkcls.pull-right.well(style="background-color:#e5fff9")
+                    b #{value.from}
+                    h5
+                    -var msgtxt=value.text
+                    if(msgtxt.search('data:video')>=0)
+                      b Video :
+                      video(width=320 height=240 controls='' src="#{value.text}" type='video/mp4')
+                    else if(msgtxt.search('data:image')>=0)
+                      b Image :
+                      img(style='width:220px;height200px', src="#{value.text}")
+                    else
+                      b Msg :
+                      &nbsp #{value.text}
+
+                    h5.text-right
+                      - var dateView = value.createdAt
+                      |#{moment(dateView).format('lll')}
+          else
+            h3 no record Found
+          div#imageDiv
+      div#msgToNotify.chat__messages
+      .chat__footer
+        form#formId
+          input#input_val(name='inputName', type='text', placeholder='message', autofocus='', autocomplete='off')
+          button#sendbtn Send
+          button#locationBtnId Send location

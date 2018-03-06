@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Join | ChatApp
+    meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+    script(src='/js/displayingUserChat.js')
+  body
+    h3 my chat history
+    ul
+      each val in chat
+        each val2 in val
+          li #{val2}

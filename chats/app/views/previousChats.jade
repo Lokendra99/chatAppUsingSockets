@@ -1,0 +1,17 @@
+extends ./layout.jade
+
+
+block title
+  title friendlist
+
+block content
+
+  body
+    .container.well(style='margin-top:20px')
+      h2 Friends List
+      if friendsList.length!=0
+        each  value,index  in friendsList
+            .list-group
+                a.list-group-item(href='/previousChatsHistory/#{value}/#{hisName}') #{value}
+      else
+        h3 no record Found

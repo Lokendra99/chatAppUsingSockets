@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Join | ChatApp
+    meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+    link(rel='stylesheet', href='./css/chatStyle.css')
+  body.centered-form
+    .centered-form__form
+      form(action='/chat/#{choice}')
+        .form-field
+          h3
+            | Join a Chat
+            h3 #{userName}
+        .form-field
+          label Display name
+
+          input(type='text', name='name',value='#{userName}',readonly='readonly')
+        .form-field
+          label Room name
+          input(type='text',autofocus='', name='room')
+        .form-field
+          button Join
